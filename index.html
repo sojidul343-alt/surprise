@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Happy Birthday</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Itim&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <audio id="bgm" loop preload="auto"></audio>
+  <button class="music-btn" id="musicBtn" aria-label="Mute or unmute music" hidden>🎵</button>
+
+  <div class="flood" id="flood" aria-hidden="true"></div>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <main id="app">
+
+    <!-- 1. Heart intro -->
+    <section class="screen active" id="s-heart">
+      <button class="heart-btn" id="heartBtn" aria-label="Tap the heart to begin">
+        <svg viewBox="0 0 32 29" aria-hidden="true"><path d="M23.6 0c-2.9 0-5.4 1.5-7.6 4.3C13.8 1.5 11.3 0 8.4 0 3.8 0 0 3.7 0 8.3c0 9.3 14.4 19.1 16 20.4 1.6-1.3 16-11.1 16-20.4C32 3.7 28.2 0 23.6 0z"/></svg>
+      </button>
+    </section>
+
+    <!-- 2. Envelope + letter -->
+    <section class="screen" id="s-letter">
+      <h1 class="serif-title" id="letterTitle"></h1>
+      <p class="hint italic">Tap the envelope to unseal</p>
+      <button class="envelope" id="envelope" aria-label="Open the letter">
+        <span class="env-back"></span>
+        <span class="env-flap"></span>
+        <span class="env-front"></span>
+        <span class="seal"><i>✦</i></span>
+        <span class="env-label" id="envLabel"></span>
+      </button>
+    </section>
+
+    <!-- 3. Cake -->
+    <section class="screen" id="s-cake">
+      <h1 class="cake-title" id="cakeTitle">Swipe to Cut the Cake! 🎂</h1>
+      <p class="hint" id="cakeHint">Drag your finger/cursor to slice</p>
+      <div class="cake-area" id="cakeArea">
+        <div class="cake-wrap" id="cakeWrap">
+          <canvas class="pixel cake-half left" width="40" height="36"></canvas>
+          <canvas class="pixel cake-half right" width="40" height="36"></canvas>
+        </div>
+        <canvas class="slash" id="slash"></canvas>
+      </div>
+      <button class="ghost-btn next-btn" id="cakeNext" hidden>Next →</button>
+    </section>
+
+    <!-- 4. Lock -->
+    <section class="screen" id="s-lock">
+      <button class="lock-btn" id="lockBtn" aria-label="Tap the lock to continue">
+        <canvas class="pixel lock" id="lockCanvas" width="16" height="15"></canvas>
+      </button>
+      <p class="hint" id="lockHint">Tap the lock to continue ✨</p>
+    </section>
+
+    <!-- 5. Keypad -->
+    <section class="screen" id="s-keypad">
+      <canvas class="pixel lock small" id="lockCanvas2" width="16" height="15"></canvas>
+      <p class="prompt" id="keyPrompt">Enter DOB To Unlock The Memories</p>
+      <div class="dots" id="dots" aria-live="polite"><span class="placeholder">Enter Code</span></div>
+      <div class="keypad" id="keypad">
+        <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button>
+        <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button>
+        <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button>
+        <button data-k="del" aria-label="Delete">⌫</button><button data-k="0">0</button><button data-k="clear" aria-label="Clear">C</button>
+      </div>
+    </section>
+
+    <!-- 6. Unlocked -->
+    <section class="screen" id="s-unlocked">
+      <canvas class="pixel lock" id="lockCanvas3" width="16" height="15"></canvas>
+      <p class="prompt">Correct Passkey ✨</p>
+      <p class="hint">Here Your Memories Await...</p>
+      <button class="solid-btn" id="viewBtn">View Memories</button>
+    </section>
+
+    <!-- 7. Gallery -->
+    <section class="screen" id="s-gallery">
+      <h1 class="serif-title big">Special Memories</h1>
+      <div class="rule"></div>
+      <p class="hint italic">Swipe for more ♥</p>
+      <div class="coverflow" id="coverflow" tabindex="0" aria-label="Photo carousel"></div>
+      <button class="ghost-btn pill" id="restartBtn">Restart</button>
+    </section>
+
+  </main>
+
+  <!-- Letter modal -->
+  <div class="backdrop" id="backdrop" hidden>
+    <div class="paper" role="dialog" aria-modal="true" aria-labelledby="paperTitle">
+      <button class="close" id="closeLetter" aria-label="Close letter">×</button>
+      <h2 id="paperTitle">Happy Birthday ✨</h2>
+      <p class="sub">Just for you ♡</p>
+      <div class="paper-body" id="paperBody"></div>
+    </div>
+    <button class="ghost-btn next-btn" id="letterNext" hidden>Next →</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
